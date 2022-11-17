@@ -29,7 +29,6 @@
                     alt="avatar"
                     className="rounded-full"
                 />
-                
                 <p className="text-sm text-gray-500">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                     Impedit nemo illum, beatae ullam ad ipsa eos doloremque sed hic?

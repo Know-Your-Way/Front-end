@@ -1,3 +1,5 @@
+const { yellow } = require('tailwindcss/colors');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -8,9 +10,8 @@ module.exports = {
     screens:{
       sm: '480px',
       md: '768px',
-      lg: '976px',
-      xl: '1440px'
-
+      lg: '1040px',
+      xl: '1240px'
     },
     extend: {},
   },

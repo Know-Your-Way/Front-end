@@ -5,6 +5,7 @@ import Home from './pages/HomePage/Home'
 import About from './pages/AboutPage/About'
 import Contact from './pages/ContactPage/Contact'
 import Nav from './pages/HomePage/Nav'
+import Map from './pages/map/Map'
 
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<Contact/>}/>
+        <Route path='/map' element={<Map/>}/>
       </Routes>
     </>
   )

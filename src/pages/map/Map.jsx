@@ -4,9 +4,9 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon } from 'leaflet';
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
 import axios from 'axios';
+import Fetch_Api from '../../api/Fetch_Api';
 
-
-
+Fetch_Api()
 
 const Map = () => {
   const [toilet, setToilet] = useState([])

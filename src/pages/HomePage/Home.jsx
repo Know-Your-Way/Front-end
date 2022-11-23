@@ -4,13 +4,18 @@ import Cards from './Cards'
 import Map from '../map/Map'
 
 
+
+
 const Home = () => {
+
     return (
         <>
         <Hero /> 
         <Cards/>
         <Map/>
+        
         </>
+        
     )
 }
 

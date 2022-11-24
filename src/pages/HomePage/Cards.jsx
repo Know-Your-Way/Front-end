@@ -15,7 +15,7 @@ const Cards = () => {
                         <p className="mt-7 text-gray-600 text-center dark:text-gray-200 group-hover:text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur minus consequuntur!</p>
 
                         <div className="flex justify-center mt-4">
-                            <h6 href="#" className="text-lg font-medium text-blue-600 dark:text-blue-300 group-hover:text-white" tabindex="0" role="link">Dan</h6>
+                            <h6 href="#" className="text-lg font-medium text-blue-600 dark:text-blue-300 group-hover:text-white"  role="link">Dan</h6>
                         </div>
                     </div>
                     <div className="group w-full h-72 max-w-sm p-2 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800 hover:bg-sky-700">
@@ -25,7 +25,7 @@ const Cards = () => {
                         <p className="mt-7 text-gray-600 text-center dark:text-gray-200 group-hover:text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur minus consequuntur!</p>
 
                         <div className="flex justify-center mt-4">
-                            <h6 href="#" className="text-lg font-medium text-blue-600 dark:text-blue-300 group-hover:text-white" tabindex="0" role="link">Antony</h6>
+                            <h6 href="#" className="text-lg font-medium text-blue-600 dark:text-blue-300 group-hover:text-white" role="link">Antony</h6>
                         </div>
                     </div>
                     <div className="group w-full h-72 max-w-sm p-2 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800 hover:bg-sky-700">
@@ -35,7 +35,7 @@ const Cards = () => {
                         <p className="mt-7 text-gray-600 text-center dark:text-gray-200 group-hover:text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt ea doloremque natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur minus consequuntur!</p>
 
                         <div className="flex justify-center mt-4">
-                            <h6 href="#" className="text-lg font-medium text-blue-600 dark:text-blue-300 group-hover:text-white" tabindex="0" role="link">Juliya</h6>
+                            <h6 href="#" className="text-lg font-medium text-blue-600 dark:text-blue-300 group-hover:text-white" role="link">Juliya</h6>
                         </div>
                     </div>
                 </div>

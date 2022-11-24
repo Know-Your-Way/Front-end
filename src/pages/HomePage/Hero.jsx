@@ -1,7 +1,9 @@
-import React from 'react'
 import Filters from '../../components/Filters'
+import { useContext } from 'react'
+import { MyLocation } from '../../App'
 
 const Hero = () => {
+    const { category, filterData } = useContext(MyLocation)
     return (
         <div className='bg-home bg-cover bg-center h-130 md:h-129'>
             <div className=' container mx-auto flex flex-col md:flex-row items-center px-6 space-y-0 md:space-y-0' >
@@ -14,7 +16,7 @@ const Hero = () => {
                     <img src='/Asset/Home.svg' alt='hero_img' className='pt-10 md:pt-32' />
                 </div>
             </div>
-            <Filters />
+            <Filters category={category} filterData={filterData}/>
         </div>
     )
 }

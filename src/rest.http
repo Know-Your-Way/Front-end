@@ -1,0 +1,1 @@
+GET http://localhost:1337/api/locations?populate[0]=categories HTTP/1.1

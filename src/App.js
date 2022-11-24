@@ -5,12 +5,16 @@ import Home from './pages/HomePage/Home'
 import About from './pages/AboutPage/About'
 import Contact from './pages/ContactPage/Contact'
 import Nav from './pages/HomePage/Nav'
+<<<<<<< HEAD
 import Footer from './pages/HomePage/Footer'
 import Map from './pages/map/Map'
 import GetLocationView from './view-model/GetLocationView'
 
 
 export const MyLocation = createContext()
+=======
+import Map from './pages/map/Map'
+>>>>>>> a553736671b5c049fe6044df5a3fd954b386d853
 
 
 const App = () => {
@@ -41,6 +45,7 @@ const App = () => {
 
   return (
     <>
+<<<<<<< HEAD
       <MyLocation.Provider value={{ category, places, allPlaces, filterData }}>
         <Nav />
         <Routes>
@@ -51,6 +56,15 @@ const App = () => {
         </Routes>
         <Footer />
       </MyLocation.Provider>
+=======
+    <Nav/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/about' element={<About/>}/>
+        <Route path='/contact' element={<Contact/>}/>
+        <Route path='/map' element={<Map/>}/>
+      </Routes>
+>>>>>>> a553736671b5c049fe6044df5a3fd954b386d853
     </>
   )
 }

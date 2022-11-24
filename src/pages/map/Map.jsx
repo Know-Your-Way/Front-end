@@ -43,5 +43,4 @@ const Map = () => {
     </section>
   )
 }
-
-export default Map;
+export default Map

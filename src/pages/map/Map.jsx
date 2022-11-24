@@ -16,7 +16,9 @@ const Map = () => {
 
   return (
     <section className="min-h-screen min-w-full leaflet-container">
+    
     <Filters category={category} filterData={filterData}/>
+
       <MapContainer className="min-h-screen min-w-full"
         center={position}
         zoom={13}

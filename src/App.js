@@ -17,6 +17,7 @@ const App = () => {
   const [places, setPlaces] = useState([]);
   const [allPlaces, setAllPlaces] = useState([]);
   const [category, setCategory] = useState([]);
+  const [currentCategory, setCurrentCategory ] = useState('Select Option')
   
 
   useEffect(() => {
@@ -34,14 +35,15 @@ const App = () => {
   const filterData = (catItem) => {
     const result = allPlaces.filter((curItem) => {
         return curItem.attributes.category === catItem;
-    })
+    });
+    setCurrentCategory(catItem)
     setPlaces(result)
 }
 
 
   return (
     <>
-      <MyLocation.Provider value={{ category, places, allPlaces, filterData }}>
+      <MyLocation.Provider value={{ category, places, allPlaces, filterData, currentCategory}}>
         <Nav />
         <Routes>
           <Route path='/' element={<Home />} />

@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { GrLocation } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 
 
-const Filters = ({ category, filterData }) => {
-
-    const handlerOption = () => {
-        filterData()
-    }
+const Filters = ({ category, filterData, currentCategory}) => {
 
     return (
         <div className='container mx-auto '>
@@ -21,7 +17,8 @@ const Filters = ({ category, filterData }) => {
                     </div>
                     <div className='mt-4'>
                         <div className=' relative'>
-                            <select className='w-64 lg:w-64 capitalize rounded-md' onChange={(e) => filterData(e.target.value)}>
+                            <select className='w-64 lg:w-64 capitalize rounded-md'>
+                                <option value={currentCategory}>{currentCategory}</option>
                                 {Array.isArray(category)
                                     ? category.map((cat_name, id) => {
                                         return (
@@ -34,7 +31,7 @@ const Filters = ({ category, filterData }) => {
                     <div className='mt-4'>
                         <div className=' relative'>
                             <Link to='/map'> <button class="px-6 py-2 w-64 lg:w-64 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
-                                onClick={() => handlerOption}>Search</button></Link>
+                                onClick={(e) => filterData(document.querySelector('select').value)}>Search</button></Link>
                         </div>
                     </div>
                 </div>

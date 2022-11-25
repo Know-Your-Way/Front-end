@@ -8,7 +8,7 @@ const Places = () => {
 
     const handleClick = (e) => {
         console.log(e.target.id); 
-        settingCard(e.target.id); 
+        settingCard(e.target.id, e.target.src); 
        }; 
 
     return (

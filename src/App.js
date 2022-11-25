@@ -17,9 +17,10 @@ export const MyLocation = createContext()
 
 const App = () => {
   const [places, setPlaces] = useState([]);
-  const [card, setCard] = useState({id:""});
+  const [card, setCard] = useState({id:"", imagePath:"", title: "", description: "", phone:"", website:""});
   const [allPlaces, setAllPlaces] = useState([]);
   const [category, setCategory] = useState([]);
+  const [landmark, setLandmark] = useState([]);
   const [currentCategory, setCurrentCategory ] = useState('Select Option')
   
 
@@ -34,6 +35,14 @@ const App = () => {
       })
   }, [])
 
+  useEffect(() => {
+    GetLandmarkView().then((landmarkRes)=>{
+      setLandmark(landmarkRes);
+    }).catch((err) => {
+      console.log(err)
+    })
+  }, [])
+
 
   const filterData = (catItem) => {
     const result = allPlaces.filter((curItem) => {
@@ -43,16 +52,23 @@ const App = () => {
     setPlaces(result)
 }
 
-  const settingCard = (cardId) => {
-    GetLandmarkView().then((res) => res.json()).log();
+  const settingCard = (cardId, imgPath) => {
+    const result = landmark.filter((dataItem) => {
+      console.log(dataItem);
+      return dataItem.id === Number(cardId);
+    });
     console.log(cardId);
-    setCard({id: cardId});
+    console.log(result[0]);
+    const res = result[0].attributes;
+    setCard({id: cardId, imagePath: imgPath, 
+      title: res.Title, description: res.Description,
+      phone: res.Phone, website: res.Website});
   }
 
 
   return (
     <>
-      <MyLocation.Provider value={{ category, places, card, settingCard, allPlaces, filterData, currentCategory}}>
+      <MyLocation.Provider value={{ category, places, card, landmark, settingCard, allPlaces, filterData, currentCategory}}>
         <Nav />
         <Routes>
           <Route path='/' element={<Home />} />

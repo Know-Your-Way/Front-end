@@ -3,7 +3,6 @@ import React, {useRef} from 'react';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
-
   const form = useRef();
 
   const sendEmail = (e) => {
@@ -12,14 +11,14 @@ const Contact = () => {
     emailjs.sendForm('service_rpw285v', 'contact_form', form.current, 'Y39z6YlGoKk14XZc_')
       .then((result) => {
           console.log(result.text);
+          console.log("success")
       }, (error) => {
           console.log(error.text);
       });
-    }
-
+  };
   return (
     <div className="container mx-auto bg-contact">
-      <section ref={form} onSubmit={sendEmail} className="text-gray-600 body-font relative">
+      <form ref={form} onSubmit={sendEmail} className="text-gray-600 body-font relative">
         <div className="container px-5 py-24 mx-auto flex">
           <img src='/Asset/Contact.svg' alt='hero_img' className='object-contain' />
           <div className="lg:w-1/3 md:w-1/2 bg-gray-500 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
@@ -28,7 +27,7 @@ const Contact = () => {
             </h2>
             <div className="relative mb-4">
               <label for="email" className="leading-7 text-sm text-white">
-              First name
+                First name
               </label>
               <input
                 type="text"
@@ -37,7 +36,7 @@ const Contact = () => {
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               ></input>
               <label for="email" className="leading-7 text-sm text-white">
-               Last name
+                Last name
               </label>
               <input
                 type="text"
@@ -45,8 +44,8 @@ const Contact = () => {
                 name="last_name"
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               ></input>
-               <label for="email" className="leading-7 text-sm text-white">
-              Telephone number
+              <label for="email" className="leading-7 text-sm text-white">
+                Telephone number
               </label>
               <input
                 type="text"
@@ -79,7 +78,7 @@ const Contact = () => {
             </button>
           </div>
         </div>
-      </section>
+      </form>
     </div>
   );
 };

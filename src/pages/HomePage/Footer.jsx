@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import ScrollToTop from './ScrollToTop';
 const Footer = () => {
     return (
         <div>
@@ -79,7 +79,7 @@ const Footer = () => {
       </a>
     </div>
   </div>
-
+<ScrollToTop/>
   <div class="text-center p-4">
     © 2022 Copyright : 
     <a class="text-white" href=" "> ChampionsGroup</a>

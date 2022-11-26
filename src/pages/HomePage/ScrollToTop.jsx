@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaArrowUp } from 'react-icons/fa';
 
 const ScrollToTop = () => {
-    const [showGoTop, setShowGoTop] = useState(false)
+    const [showGoTop, setShowGoTop] = useState(false);
 
     const handleVisibleButton = () => {
         setShowGoTop(window.pageYOffset > 50)
@@ -10,6 +10,7 @@ const ScrollToTop = () => {
 
     const handleScrollUp = () => {
         window.scrollTo({ left: 0, top: 0, behavior: 'smooth' })
+        setShowGoTop(showGoTop === "false")
     }
 
     useEffect(() => {
@@ -17,8 +18,8 @@ const ScrollToTop = () => {
     }, [])
 
     return (
-        <div className={showGoTop} onClick={handleScrollUp}>
-            <button type={'button'}>
+        <div >
+            <button type={'button'} onClick={handleScrollUp}>
                 <FaArrowUp/>
             </button>
         </div>

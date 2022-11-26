@@ -17,12 +17,22 @@ export const MyLocation = createContext()
 
 const App = () => {
   const [places, setPlaces] = useState([]);
-  const [card, setCard] = useState({id:"", imagePath:"", title: "", description: "", phone:"", website:""});
+  const [card, setCard] = useState({id:"", imagePath:"", title: "", description: "", phone:"", email:"", website:""});
   const [allPlaces, setAllPlaces] = useState([]);
   const [category, setCategory] = useState([]);
   const [landmark, setLandmark] = useState([]);
   const [currentCategory, setCurrentCategory ] = useState('Select Option')
+  const baseApi = 'http://localhost:1337';
   
+
+  useEffect(() => {
+    GetLandmarkView().then((landmarkRes)=>{
+      setLandmark(landmarkRes);
+      console.log("Landmark Res", landmarkRes);
+    }).catch((err) => {
+      console.log(err)
+    })
+  }, [])
 
   useEffect(() => {
       GetLocationView().then((locations)=>{
@@ -35,15 +45,6 @@ const App = () => {
       })
   }, [])
 
-  useEffect(() => {
-    GetLandmarkView().then((landmarkRes)=>{
-      setLandmark(landmarkRes);
-    }).catch((err) => {
-      console.log(err)
-    })
-  }, [])
-
-
   const filterData = (catItem) => {
     const result = allPlaces.filter((curItem) => {
         return curItem.attributes.category === catItem;
@@ -52,17 +53,19 @@ const App = () => {
     setPlaces(result)
 }
 
-  const settingCard = (cardId, imgPath) => {
+  const settingCard = (cardId) => {
     const result = landmark.filter((dataItem) => {
       console.log(dataItem);
       return dataItem.id === Number(cardId);
     });
+
     console.log(cardId);
     console.log(result[0]);
     const res = result[0].attributes;
-    setCard({id: cardId, imagePath: imgPath, 
+    console.log(baseApi+res.ImageUrl);
+    setCard({id: cardId, imagePath: baseApi+res.ImageUrl, 
       title: res.Title, description: res.Description,
-      phone: res.Phone, website: res.Website});
+      phone: res.Phone, email: res.Email, website: res.Website});
   }
 
 

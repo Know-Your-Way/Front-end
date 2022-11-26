@@ -1,8 +1,8 @@
 import getLandmark from '../api/landmark.api'
 
 const GetLandmarkView = async () => {
-    const location = await getLandmark();
-    const res = await location
+    const landmark = await getLandmark();
+    const res = await landmark
     return res;
 }
 

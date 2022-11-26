@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { MyLocation } from '../../App'
 
 const Places = () => {
-    const { settingCard } = useContext(MyLocation)
+    const { settingCard } = useContext(MyLocation);
 
     const handleClick = (e) => {
         console.log(e.target.id); 

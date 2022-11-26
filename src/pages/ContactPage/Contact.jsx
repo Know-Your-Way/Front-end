@@ -1,24 +1,33 @@
 
-import React, {useRef} from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
+import emailjs from '@emailjs/browser'
+
+const Result = () => {
+ return(
+  <p className="mb-8 text-secondary leading-relaxed">Your message has been succesfully sent</p>
+ )
+}
 
 const Contact = () => {
-  const form = useRef();
-
+  const [result, showResult] = useState(false)
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_rpw285v', 'contact_form', form.current, 'Y39z6YlGoKk14XZc_')
+    emailjs.sendForm('service_rpw285v', 'contact_form',e.target , 'Y39z6YlGoKk14XZc_')
       .then((result) => {
-          console.log(result.text);
-          console.log("success")
+        console.log(result.text);
       }, (error) => {
           console.log(error.text);
+
       });
+      e.target.reset();
+      showResult(true)
+
   };
+
   return (
     <div className="container mx-auto bg-contact">
-      <form ref={form} onSubmit={sendEmail} className="text-gray-600 body-font relative">
+      <form action="" onSubmit={sendEmail} className="text-gray-600 body-font relative">
         <div className="container px-5 py-24 mx-auto flex">
           <img src='/Asset/Contact.svg' alt='hero_img' className='object-contain' />
           <div className="lg:w-1/3 md:w-1/2 bg-gray-500 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
@@ -75,11 +84,16 @@ const Contact = () => {
             </div>
             <button className="text-gray-600 bg-white border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg">
             <input type="submit" value="Send" />Button
-            </button>
+            </button> 
+            <div className='row'>{
+              result ? <Result/> : null
+            }
+            </div>
           </div>
         </div>
       </form>
     </div>
+  
   );
 };
 

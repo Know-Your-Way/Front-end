@@ -9,7 +9,7 @@ import Filters from "../../components/Filters";
 import UseGeoLocation from "./geolocation";
 
 const Map = () => {
-  const { category, currentCategory, filterData } = useContext(MyLocation);
+  const { category, currentCategory, setCurrentCategory, setInput, filterData } = useContext(MyLocation);
 
   const { places } = useContext(MyLocation);
 
@@ -21,7 +21,10 @@ const Map = () => {
     <section className="min-h-screen min-w-full leaflet-container">
       <Filters category={category} 
       currentCategory={currentCategory}
-      filterData={filterData} />
+      filterData={filterData}
+      setInput={setInput} 
+      setCurrentCategory={setCurrentCategory}
+      />
 
       <MapContainer
         className="min-h-screen min-w-full"

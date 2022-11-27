@@ -1,9 +1,7 @@
 const baseApi = 'http://localhost:1337';
 
-
-
 const getLandmark = async () => {
-    const response = await fetch('http://localhost:1337/api/landmarks')
+    const response = await fetch('http://localhost:1337/api/landmarks?populate=*')
     const result = await response.json();
     const data = await result.data;
     return data;

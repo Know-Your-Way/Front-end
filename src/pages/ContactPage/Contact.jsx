@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import emailjs from "@emailjs/browser";
-import { Result, schema } from "../../components/ContactComponents";
+import { schema } from "../../components/ContactComponents";
 import validate from "validate.js";
+
+
+const Result = () => {
+  return(
+    <p className="mb-8 text-secondary leading-relaxed">Your message has been succesfully sent</p>
+  )
+ }
 
 const Contact = () => {
   const [result, showResult] = useState(false)
+  const form = useRef();
   const sendEmail = (e) => {
     e.preventDefault();
-
+  
     emailjs
       .sendForm(
         "service_rpw285v",
@@ -15,21 +23,16 @@ const Contact = () => {
         e.target,
         "Y39z6YlGoKk14XZc_"
       )
-      .then(
-        (result) => {
-          console.log("SUCCESS!", result.text);
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
-      showResult(true)
-      if(showResult === true){
-        e.target.reset();
-      }
-    
-    
+      .then((result) => {
+        console.log('SUCCESS!', result.text);
+    }, (error) => {
+        console.log('FAILED...', error.text);
+    });
+    showResult(true)
+    e.target.reset();
+
   };
+
   const [formState, setFormState] = useState({
     isValid: false,
     values: {},
@@ -59,7 +62,9 @@ const Contact = () => {
         ...formState.touched,
         [e.target.name]: true,
       },
+   
     }));
+    
   };
   const hasError = (field) =>
     formState.touched[field] && formState.errors[field] ? true : false;
@@ -67,7 +72,7 @@ const Contact = () => {
   return (
     <div className="container mx-auto bg-contact">
       <form
-        action=""
+        ref={form}
         onSubmit={sendEmail}
         className="text-gray-600 body-font relative"
       >
@@ -93,7 +98,9 @@ const Contact = () => {
                 name="from_name"
                 id="name"
                 fullWidth
-                helperText={hasError("from_name") ? formState.errors.from_name[0] : null}
+                helperText={
+                  hasError("from_name") ? formState.errors.from_name[0] : null
+                }
                 error={hasError("from_name")}
                 onChange={handleChange}
                 type="text"
@@ -111,14 +118,19 @@ const Contact = () => {
                 name="last_name"
                 id="name"
                 fullWidth
-                helperText={hasError("last_name") ? formState.errors.last_name[0] : null}
+                helperText={
+                  hasError("last_name") ? formState.errors.last_name[0] : null
+                }
                 error={hasError("last_name")}
                 onChange={handleChange}
                 type="text"
                 value={formState.values.last_name || ""}
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               ></input>
-              <label for="contact_number" className="leading-7 text-sm text-white">
+              <label
+                for="contact_number"
+                className="leading-7 text-sm text-white"
+              >
                 Telephone number
               </label>
               <input
@@ -128,10 +140,14 @@ const Contact = () => {
                 size="medium"
                 name="contact_number"
                 fullWidth
-                helperText={hasError("contact_number") ? formState.errors.contact_number[0] : null}
+                helperText={
+                  hasError("contact_number")
+                    ? formState.errors.contact_number[0]
+                    : null
+                }
                 error={hasError("contact_number")}
                 onChange={handleChange}
-                type="text"
+                type="number"
                 value={formState.values.contact_number || ""}
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               ></input>
@@ -145,30 +161,32 @@ const Contact = () => {
                 size="medium"
                 name="user_email"
                 fullWidth
-                helperText={hasError('user_email') ? formState.errors.user_email[0] : null}
-                error={hasError('user_email')}
+                helperText={
+                  hasError("user_email") ? formState.errors.user_email[0] : null
+                }
+                error={hasError("user_email")}
                 onChange={handleChange}
                 type="email"
-                value={formState.values.user_email || ''}
+                value={formState.values.user_email || ""}
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               ></input>
             </div>
             <div className="relative mb-4">
-              <label className="leading-7 text-sm text-white">
-                Message
-              </label>
+              <label className="leading-7 text-sm text-white">Message</label>
               <textarea
-                 placeholder="Write your message here"
-                 label="message *"
-                 variant="outlined"
-                 size="medium"
-                 name="message"
-                 fullWidth
-                 helperText={hasError('message') ? formState.errors.message[0] : null}
-                 error={hasError('message')}
-                 onChange={handleChange}
-                 type="message"
-                 value={formState.values.message || ''}
+                placeholder="Write your message here"
+                label="message *"
+                variant="outlined"
+                size="medium"
+                name="message"
+                fullWidth
+                helperText={
+                  hasError("message") ? formState.errors.message[0] : null
+                }
+                error={hasError("message")}
+                onChange={handleChange}
+                type="message"
+                value={formState.values.message || ""}
                 className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
               ></textarea>
             </div>

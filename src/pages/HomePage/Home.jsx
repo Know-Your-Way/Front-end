@@ -1,18 +1,13 @@
 import React from 'react'
 import Hero from './Hero'
 import Cards from './Cards'
-import Map from '../map/Map'
 
-
-
-
-const Home = () => {
+const Home = ({setInput, input, setCurrentCategory}) => {
 
     return (
         <>
-        <Hero /> 
+        <Hero setInput={setInput} setCurrentCategory={setCurrentCategory} input={input}/> 
         <Cards/>
-        <Map/>
         
         </>
         

@@ -3,80 +3,86 @@ import { Routes, Route } from 'react-router-dom'
 
 import Home from './pages/HomePage/Home'
 import About from './pages/AboutPage/About'
-import CardDetails from './pages/CardDetailsPage/CardDetails'
 import Contact from './pages/ContactPage/Contact'
 import Nav from './pages/HomePage/Nav'
 import Footer from './pages/HomePage/Footer'
 import Map from './pages/map/Map'
 import GetLocationView from './view-model/GetLocationView'
 import GetLandmarkView from './view-model/GetLandmarkView'
-
+import OnePlace from './pages/HomePage/OnePlace'
+import { ToastContainer } from 'react-toastify'
 
 export const MyLocation = createContext()
 
 
 const App = () => {
   const [places, setPlaces] = useState([]);
-  const [card, setCard] = useState({id:"", imagePath:"", title: "", description: "", phone:"", website:""});
   const [allPlaces, setAllPlaces] = useState([]);
   const [category, setCategory] = useState([]);
   const [landmark, setLandmark] = useState([]);
-  const [currentCategory, setCurrentCategory ] = useState('Select Option')
-  
+  const [currentCategory, setCurrentCategory] = useState('')
+  const [input, setInput] = useState('')
+
+
+
 
   useEffect(() => {
-      GetLocationView().then((locations)=>{
-        setPlaces(locations);
-        setAllPlaces(locations);
-        const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
-        setCategory(allCategories);
-      }).catch((err) => {
-        console.log(err)
+    GetLocationView().then((locations) => {
+      let filterLocations = locations
+      if (input) {
+        filterLocations = filterLocations.filter((item) => {
+          return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
+        })
+      }
+      
+      if (currentCategory) {
+        filterLocations = filterLocations.filter((item) => {
+          console.log(item, '36')
+          
+          return currentCategory.toLowerCase() === item.attributes.category.toLowerCase()
+        })
+      }
+      setPlaces(filterLocations);
+      setAllPlaces(filterLocations)
+      
+      console.log(filterLocations, 'filterLocations')
+
+      const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
+      console.log(allCategories, 'all')
+      setCategory(allCategories);
+      // landmark 
+      GetLandmarkView().then((landmark) => {
+        setLandmark(landmark)
       })
-  }, [])
-
-  useEffect(() => {
-    GetLandmarkView().then((landmarkRes)=>{
-      setLandmark(landmarkRes);
     }).catch((err) => {
       console.log(err)
     })
-  }, [])
+  }, [input, currentCategory ])
 
 
   const filterData = (catItem) => {
     const result = allPlaces.filter((curItem) => {
-        return curItem.attributes.category === catItem;
+      return curItem.attributes.category === catItem;
     });
     setCurrentCategory(catItem)
     setPlaces(result)
-}
-
-  const settingCard = (cardId, imgPath) => {
-    const result = landmark.filter((dataItem) => {
-      console.log(dataItem);
-      return dataItem.id === Number(cardId);
-    });
-    console.log(cardId);
-    console.log(result[0]);
-    const res = result[0].attributes;
-    setCard({id: cardId, imagePath: imgPath, 
-      title: res.Title, description: res.Description,
-      phone: res.Phone, website: res.Website});
   }
+
+
 
 
   return (
     <>
-      <MyLocation.Provider value={{ category, places, card, landmark, settingCard, allPlaces, filterData, currentCategory}}>
+      <MyLocation.Provider value={{ category, places, landmark, allPlaces, setCurrentCategory, setInput, filterData, currentCategory }}>
         <Nav />
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<Home input={input} setInput={setInput} setCurrentCategory={setCurrentCategory} />} />
           <Route path='/about' element={<About />} />
-          <Route path='/card-details' element={<CardDetails />} />
+          <Route path='/places/:id' element={<OnePlace />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/map' element={<Map />} />
         </Routes>
+      
         <Footer />
       </MyLocation.Provider>
     </>

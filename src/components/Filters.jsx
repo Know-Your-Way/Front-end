@@ -2,8 +2,7 @@ import React from 'react'
 import { GrLocation } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 
-
-const Filters = ({ category, filterData, currentCategory}) => {
+const Filters = ({ category, filterData, setCurrentCategory, setInput, currentCategory}) => {
 
     return (
         <div className='container mx-auto '>
@@ -11,14 +10,15 @@ const Filters = ({ category, filterData, currentCategory}) => {
                 <div className=' flex flex-col pt-5 justify-evenly items-center md:pt-0 md:flex-row md:items-center md:justify-around'>
                     <div className='mt-4'>
                         <div className=' relative'>
-                            <input type='text' placeholder='Enter Your Destination?' className=' w-64 lg:w-64 rounded-md' />
+                            <input type='text' placeholder='Enter Your Destination?' className=' w-64 lg:w-64 rounded-md'
+                            onChange={(e)=>setInput(e.target.value)} />
                             <GrLocation className=' absolute top-3 left-56' />
                         </div>
                     </div>
                     <div className='mt-4'>
                         <div className=' relative'>
-                            <select className='w-64 lg:w-64 capitalize rounded-md'>
-                                <option value={currentCategory}>{currentCategory}</option>
+                            <select className='w-64 lg:w-64 capitalize rounded-md' onChange={(e)=> setCurrentCategory(e.target.value)}>
+                                <option  value={currentCategory}>{currentCategory} </option>
                                 {Array.isArray(category)
                                     ? category.map((cat_name, id) => {
                                         return (

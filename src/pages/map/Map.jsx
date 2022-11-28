@@ -9,9 +9,7 @@ import Filters from "../../components/Filters";
 import UseGeoLocation from "./geolocation";
 
 const Map = () => {
-  const { category, currentCategory, setCurrentCategory, setInput, filterData } = useContext(MyLocation);
-
-  const { places } = useContext(MyLocation);
+  const { category, currentCategory, places, input, setCurrentCategory, setInput, filterData } = useContext(MyLocation);
 
   const position = [50.846, 4.3518];
   const userLocation = UseGeoLocation();
@@ -24,6 +22,8 @@ const Map = () => {
       filterData={filterData}
       setInput={setInput} 
       setCurrentCategory={setCurrentCategory}
+      places={places}
+      input={input}
       />
 
       <MapContainer

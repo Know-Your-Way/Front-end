@@ -1,6 +1,5 @@
 import React, { useEffect, useState, createContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
-
 import Home from './pages/HomePage/Home'
 import About from './pages/AboutPage/About'
 import Contact from './pages/ContactPage/Contact'
@@ -22,41 +21,62 @@ const App = () => {
   const [currentCategory, setCurrentCategory] = useState('')
   const [input, setInput] = useState('')
 
-
+  console.log(input, currentCategory, 'app')
 
 
   useEffect(() => {
     GetLocationView().then((locations) => {
       let filterLocations = locations
       if (input) {
-        filterLocations = filterLocations.filter((item) => {
+       filterLocations.filter((item) => {
+          console.log(item, 'useEffect')
           return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
         })
-      }
-      
-      if (currentCategory) {
-        filterLocations = filterLocations.filter((item) => {
-          console.log(item, '36')
-          
-          return currentCategory.toLowerCase() === item.attributes.category.toLowerCase()
-        })
-      }
-      setPlaces(filterLocations);
+      //   if (currentCategory) {
+      //     filterLocations = filterLocations.filter((item) => {
+      //       return currentCategory.toLowerCase() === item.attributes.category.toLowerCase()
+      //     })
+      //   }
+       }
+        console.log(filterLocations, '41')
+      setPlaces(filterLocations)
       setAllPlaces(filterLocations)
-      
-      console.log(filterLocations, 'filterLocations')
 
       const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
-      console.log(allCategories, 'all')
       setCategory(allCategories);
-      // landmark 
-      GetLandmarkView().then((landmark) => {
-        setLandmark(landmark)
-      })
-    }).catch((err) => {
-      console.log(err)
     })
-  }, [input, currentCategory ])
+  }, [input, currentCategory])
+
+
+
+
+  // useEffect(() => {
+  //   GetLocationView().then((locations) => {
+  //     let filterLocations = locations
+  //     if (input) {
+  //       filterLocations = filterLocations.filter((item) => {
+  //         return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
+  //       })
+  //     }
+  //     if (currentCategory) {
+  //       filterLocations = filterLocations.filter((item) => {
+
+  //         return currentCategory.toLowerCase() === item.attributes.category.toLowerCase()
+  //       })
+  //     }
+  //     setPlaces(filterLocations);
+  //     setAllPlaces(filterLocations)
+
+  //     const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
+  //     setCategory(allCategories);
+  //     // landmark 
+  //     GetLandmarkView().then((landmark) => {
+  //       setLandmark(landmark)
+  //     })
+  //   }).catch((err) => {
+  //     console.log(err)
+  //   })
+  // }, [input, currentCategory])
 
 
   const filterData = (catItem) => {
@@ -72,10 +92,10 @@ const App = () => {
 
   return (
     <>
-      <MyLocation.Provider value={{ category, places, landmark, allPlaces, setCurrentCategory, setInput, filterData, currentCategory }}>
+      <MyLocation.Provider value={{ category, places, landmark, allPlaces, input, setCurrentCategory, setInput, filterData, currentCategory }}>
         <Nav />
         <Routes>
-          <Route path='/' element={<Home input={input} setInput={setInput} setCurrentCategory={setCurrentCategory} />} />
+          <Route path='/' element={<Home input={input} setInput={setInput} places={places} setCurrentCategory={setCurrentCategory} />} />
           <Route path='/about' element={<About />} />
           <Route path='/places/:id' element={<OnePlace />} />
           <Route path='/contact' element={<Contact />} />

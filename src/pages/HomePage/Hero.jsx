@@ -2,8 +2,8 @@ import Filters from '../../components/Filters'
 import { useContext } from 'react'
 import { MyLocation } from '../../App'
 
-const Hero = ({input, setInput}) => {
-    const { category, filterData, currentCategory } = useContext(MyLocation)
+const Hero = ({places, setPlaces, location, input, setInput}) => {
+    const { category, filterData, setCurrentCategory, currentCategory } = useContext(MyLocation)
     return (
         <div className='bg-home bg-cover bg-center h-130 md:h-129'>
             <div className=' container mx-auto flex flex-col md:flex-row items-center px-6 space-y-0 md:space-y-0' >
@@ -21,6 +21,11 @@ const Hero = ({input, setInput}) => {
             filterData={filterData} 
             currentCategory={currentCategory}
             setInput={setInput}
+            places={places}
+            setCurrentCategory={setCurrentCategory}
+            input={input}
+            location={location}
+            setPlaces={setPlaces}
             />
            
         </div>

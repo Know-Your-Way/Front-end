@@ -1,6 +1,5 @@
 import React, { useEffect, useState, createContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
-
 import Home from './pages/HomePage/Home'
 import About from './pages/AboutPage/About'
 import Contact from './pages/ContactPage/Contact'
@@ -17,46 +16,43 @@ export const MyLocation = createContext()
 const App = () => {
   const [places, setPlaces] = useState([]);
   const [allPlaces, setAllPlaces] = useState([]);
+  const [location, setLocation] = useState([])
   const [category, setCategory] = useState([]);
   const [landmark, setLandmark] = useState([]);
   const [currentCategory, setCurrentCategory] = useState('')
   const [input, setInput] = useState('')
 
-
+  console.log(input, currentCategory, 'app')
 
 
   useEffect(() => {
     GetLocationView().then((locations) => {
+      setLocation(locations)
       let filterLocations = locations
       if (input) {
-        filterLocations = filterLocations.filter((item) => {
-          return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
-        })
+        console.log(input, 'input')
+        if (input) {
+          filterLocations = filterLocations.filter((item) => {
+            return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
+          })
+        }
       }
-      
-      if (currentCategory) {
-        filterLocations = filterLocations.filter((item) => {
-          console.log(item, '36')
-          
-          return currentCategory.toLowerCase() === item.attributes.category.toLowerCase()
-        })
-      }
-      setPlaces(filterLocations);
+      // console.log(filterLocations, '41')
+      setPlaces(filterLocations)
       setAllPlaces(filterLocations)
-      
-      console.log(filterLocations, 'filterLocations')
 
       const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
-      console.log(allCategories, 'all')
       setCategory(allCategories);
-      // landmark 
-      GetLandmarkView().then((landmark) => {
-        setLandmark(landmark)
-      })
-    }).catch((err) => {
-      console.log(err)
     })
-  }, [input, currentCategory ])
+  
+    GetLandmarkView().then((landmark)=>{
+      setLandmark(landmark)
+    })
+  }, [currentCategory])
+
+useEffect(()=>{
+  setPlaces(location)
+}, [input])
 
 
   const filterData = (catItem) => {
@@ -72,10 +68,10 @@ const App = () => {
 
   return (
     <>
-      <MyLocation.Provider value={{ category, places, landmark, allPlaces, setCurrentCategory, setInput, filterData, currentCategory }}>
+      <MyLocation.Provider value={{ category, places, setPlaces, location, landmark, allPlaces, input, setCurrentCategory, setInput, filterData, currentCategory }}>
         <Nav />
         <Routes>
-          <Route path='/' element={<Home input={input} setInput={setInput} setCurrentCategory={setCurrentCategory} />} />
+          <Route path='/' element={<Home input={input} setInput={setInput} places={places} setPlaces={setPlaces} location={location} setCurrentCategory={setCurrentCategory} />} />
           <Route path='/about' element={<About />} />
           <Route path='/places/:id' element={<OnePlace />} />
           <Route path='/contact' element={<Contact />} />

@@ -16,6 +16,7 @@ export const MyLocation = createContext()
 const App = () => {
   const [places, setPlaces] = useState([]);
   const [allPlaces, setAllPlaces] = useState([]);
+  const [location, setLocation] = useState([])
   const [category, setCategory] = useState([]);
   const [landmark, setLandmark] = useState([]);
   const [currentCategory, setCurrentCategory] = useState('')
@@ -26,57 +27,28 @@ const App = () => {
 
   useEffect(() => {
     GetLocationView().then((locations) => {
+      setLocation(locations)
       let filterLocations = locations
       if (input) {
-       filterLocations.filter((item) => {
-          console.log(item, 'useEffect')
-          return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
-        })
-      //   if (currentCategory) {
-      //     filterLocations = filterLocations.filter((item) => {
-      //       return currentCategory.toLowerCase() === item.attributes.category.toLowerCase()
-      //     })
-      //   }
-       }
-        console.log(filterLocations, '41')
+        console.log(input, 'input')
+        if (input) {
+          filterLocations = filterLocations.filter((item) => {
+            return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
+          })
+        }
+      }
+      // console.log(filterLocations, '41')
       setPlaces(filterLocations)
       setAllPlaces(filterLocations)
 
       const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
       setCategory(allCategories);
     })
-  }, [input, currentCategory])
+  }, [currentCategory])
 
-
-
-
-  // useEffect(() => {
-  //   GetLocationView().then((locations) => {
-  //     let filterLocations = locations
-  //     if (input) {
-  //       filterLocations = filterLocations.filter((item) => {
-  //         return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
-  //       })
-  //     }
-  //     if (currentCategory) {
-  //       filterLocations = filterLocations.filter((item) => {
-
-  //         return currentCategory.toLowerCase() === item.attributes.category.toLowerCase()
-  //       })
-  //     }
-  //     setPlaces(filterLocations);
-  //     setAllPlaces(filterLocations)
-
-  //     const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
-  //     setCategory(allCategories);
-  //     // landmark 
-  //     GetLandmarkView().then((landmark) => {
-  //       setLandmark(landmark)
-  //     })
-  //   }).catch((err) => {
-  //     console.log(err)
-  //   })
-  // }, [input, currentCategory])
+useEffect(()=>{
+  setPlaces(location)
+}, [input])
 
 
   const filterData = (catItem) => {
@@ -92,10 +64,10 @@ const App = () => {
 
   return (
     <>
-      <MyLocation.Provider value={{ category, places, landmark, allPlaces, input, setCurrentCategory, setInput, filterData, currentCategory }}>
+      <MyLocation.Provider value={{ category, places, setPlaces, location, landmark, allPlaces, input, setCurrentCategory, setInput, filterData, currentCategory }}>
         <Nav />
         <Routes>
-          <Route path='/' element={<Home input={input} setInput={setInput} places={places} setCurrentCategory={setCurrentCategory} />} />
+          <Route path='/' element={<Home input={input} setInput={setInput} places={places} setPlaces={setPlaces} location={location} setCurrentCategory={setCurrentCategory} />} />
           <Route path='/about' element={<About />} />
           <Route path='/places/:id' element={<OnePlace />} />
           <Route path='/contact' element={<Contact />} />

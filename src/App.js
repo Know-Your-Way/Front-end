@@ -44,6 +44,10 @@ const App = () => {
       const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
       setCategory(allCategories);
     })
+  
+    GetLandmarkView().then((landmark)=>{
+      setLandmark(landmark)
+    })
   }, [currentCategory])
 
 useEffect(()=>{

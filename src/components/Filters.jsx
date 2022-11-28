@@ -29,6 +29,18 @@ const Filters = ({ category, filterData, places, setPlaces, location, input, set
     }
 
 
+    let uniquePlaces = [];
+    let uniqueLocations = places.filter((element) => {
+        const isDuplicate = uniquePlaces.includes(element.attributes.sub_urban);
+        if (!isDuplicate) {
+            uniquePlaces.push(element.attributes.sub_urban);
+            return true;
+        }
+        return false;
+    });
+    places = uniqueLocations;
+
+
     return (
         <div className='container mx-auto '>
             <div className='  md:bg-white md:h-20 md:mt-3 md:rounded-md '>

@@ -5,17 +5,17 @@ import validate from "validate.js";
 
 
 const Result = () => {
-  return(
+  return (
     <p className="mb-8 text-secondary leading-relaxed">Your message has been succesfully sent</p>
   )
- }
+}
 
 const Contact = () => {
   const [result, showResult] = useState(false)
   const form = useRef();
   const sendEmail = (e) => {
     e.preventDefault();
-  
+
     emailjs
       .sendForm(
         "service_rpw285v",
@@ -25,9 +25,9 @@ const Contact = () => {
       )
       .then((result) => {
         console.log('SUCCESS!', result.text);
-    }, (error) => {
+      }, (error) => {
         console.log('FAILED...', error.text);
-    });
+      });
     showResult(true)
     e.target.reset();
 
@@ -62,9 +62,9 @@ const Contact = () => {
         ...formState.touched,
         [e.target.name]: true,
       },
-   
+
     }));
-    
+
   };
   const hasError = (field) =>
     formState.touched[field] && formState.errors[field] ? true : false;

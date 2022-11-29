@@ -9,8 +9,7 @@ const Home = ({setInput, places, input, setCurrentCategory}) => {
         <>
         <Hero setInput={setInput} places={places} setCurrentCategory={setCurrentCategory} input={input}/> 
         <Cards/>
-        <Places/>
-        
+        <Places/>   
         </>
         
     )

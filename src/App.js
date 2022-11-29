@@ -13,7 +13,6 @@ import { ToastContainer } from 'react-toastify'
 
 export const MyLocation = createContext()
 
-
 const App = () => {
   const [places, setPlaces] = useState([]);
   const [allPlaces, setAllPlaces] = useState([]);
@@ -22,8 +21,6 @@ const App = () => {
   const [landmark, setLandmark] = useState([]);
   const [currentCategory, setCurrentCategory] = useState('')
   const [input, setInput] = useState('')
-
-  console.log(input, currentCategory, 'app')
 
 
   useEffect(() => {
@@ -41,25 +38,26 @@ const App = () => {
       // console.log(filterLocations, '41')
       setPlaces(filterLocations)
       setAllPlaces(filterLocations)
+      setPlaces(location)
 
       const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
       setCategory(allCategories);
     })
-  
-    GetLandmarkView().then((landmark)=>{
+
+    GetLandmarkView().then((landmark) => {
       setLandmark(landmark)
     })
   }, [currentCategory])
 
-useEffect(()=>{
-  setPlaces(location)
-}, [input])
+  useEffect(() => {
+    setPlaces(location)
+  }, [input])
 
 
-  const filterData = (catItem) => {
+  function filterData(catItem) {
     const result = allPlaces.filter((curItem) => {
-      return curItem.attributes.category === catItem;
-    });
+      return curItem.attributes.category === catItem
+    })
     setCurrentCategory(catItem)
     setPlaces(result)
   }
@@ -69,12 +67,12 @@ useEffect(()=>{
 
   return (
     <>
-      <MyLocation.Provider value={{ category, places, setPlaces, location, landmark, allPlaces, input, setCurrentCategory, setInput, filterData, currentCategory }}>
+      <MyLocation.Provider value={{ category, places, landmark, allPlaces, input, setCurrentCategory, setInput, filterData, currentCategory }}>
         <Nav />
         <Routes>
-          <Route path='/' element={<Home input={input} setInput={setInput} places={places} setPlaces={setPlaces} location={location} setCurrentCategory={setCurrentCategory} />} />
+          <Route path='/' element={<Home input={input} setInput={setInput} places={places} setCurrentCategory={setCurrentCategory} />} />
           <Route path='/about' element={<About />} />
-          <Route path='/places/:id' element={<OnePlace />} />
+          <Route path='/places/:id' element={<OnePlace/>} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/map' element={<Map />} />
         </Routes>

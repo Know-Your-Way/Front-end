@@ -7,38 +7,72 @@ import { MyLocation } from '../../App'
 const Places = () => {
     const baseApi = 'http://localhost:1337';
     const { landmark } = useContext(MyLocation)
+
+
     return (
+
         <section className='container mx-auto m-10  pt-10 pb-20'>
-            <h2 className="text-4xl font-bold text-center text-white pb-16">Most Visited Places
-            </h2>
-            <div className="flex space-x-2">
+            <h2 className="text-4xl font-bold text-center text-gray-500 pb-16">Most Visited Places</h2>
+            <div className=' grid gap-10 md:grid-cols-2 lg:grid-cols-3 '>
                 {
                     landmark.map((img, id) => {
                         return (
-                            <div className=" w-1/4 ">
-                                <Link to={/places/ + `${img.id}`}><img alt="gallery" className=" cursor-pointer hover:scale-125 border-2 border-black rounded-lg shadow-md w-full object-cover h-full object-center block"
-                                    id="5" key={`${baseApi}${img}${id}`} src={`${baseApi}${img.attributes.image.data.attributes.url}`} />
-                                </Link>
-                            </div>         
-                            /* <div className=" w-1/4 ">
-                                <Link to={/places/ + `${img.attributes.image.data.id}`}><img alt="gallery" className=" cursor-pointer hover:scale-125 border-2 border-black rounded-lg shadow-md w-full object-cover h-full object-center block"
-                                    id="5" key={`${baseApi}${img.attributes.image.data}${id}`} src={`${baseApi}${img.attributes.image.data.attributes.url}`} />
-                                </Link>
-                            </div> */
-                            
+                            <Link to={/places/ + `${img.id}`}>
+                                <div class="flex flex-wrap flex-col items-center justify-center w-full max-w-sm mx-auto">
+                                    <div class="w-full h-64 bg-gray-200 bg-center bg-cover rounded-lg shadow-md">
+                                        <img className='w-full object-cover rounded-lg h-full object-center block hover:scale-105' id="5" key={`${baseApi}${img}${id}`} src={`${baseApi}${img.attributes.image.data.attributes.url}`} />
+                                    </div>
+                                    <div class="w-56 -mt-10 overflow-hidden bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
+                                        <h3 class="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white hover:bg-blue-500 hover:text-white">{img.attributes.Title}</h3>
+                                    </div>
+                                </div>
+                            </Link>
                         )
                     })
-                }
+                }    
             </div>
             <div className='w-full p-2 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800'>
-                <p className="px-5 text-center tracking-widest text-lg">
-                    <q>
-                        Take only memories, leave only footprints
-                    </q>
-                </p>
-            </div>
+                    <p className="px-5 text-center tracking-widest text-lg">
+                        <q>
+                            Take only memories, leave only footprints
+                        </q>
+                    </p>
+                </div>
         </section>
     )
+
+
+
+
+
+
+
+    // return (
+    //     <section className='container mx-auto m-10  pt-10 pb-20'>
+    //         <h2 className="text-4xl font-bold text-center text-white pb-16">Most Visited Places
+    //         </h2>
+    //         <div className="flex space-x-2">
+    // {
+    //     landmark.map((img, id) => {
+    //         return (
+    //             <div className=" w-1/4 ">
+    //                 <Link to={/places/ + `${img.id}`}><img alt="gallery" className=" cursor-pointer hover:scale-125 border-2 border-black rounded-lg shadow-md w-full object-cover h-full object-center block"
+    //                     id="5" key={`${baseApi}${img}${id}`} src={`${baseApi}${img.attributes.image.data.attributes.url}`} />
+    //                 </Link>
+    //             </div>        
+    //         )
+    //     })
+    // }
+    //         </div>
+    // <div className='w-full p-2 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800'>
+    //     <p className="px-5 text-center tracking-widest text-lg">
+    //         <q>
+    //             Take only memories, leave only footprints
+    //         </q>
+    //     </p>
+    // </div>
+    //     </section>
+    // )
 }
 
 export default Places

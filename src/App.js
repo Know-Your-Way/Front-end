@@ -35,7 +35,6 @@ const App = () => {
           })
         }
       }
-      // console.log(filterLocations, '41')
       setPlaces(filterLocations)
       setAllPlaces(filterLocations)
       setPlaces(location)
@@ -61,9 +60,6 @@ const App = () => {
     setCurrentCategory(catItem)
     setPlaces(result)
   }
-
-
-
 
   return (
     <>

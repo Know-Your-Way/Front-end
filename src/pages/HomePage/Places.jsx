@@ -14,13 +14,18 @@ const Places = () => {
             <div className="flex space-x-2">
                 {
                     landmark.map((img, id) => {
-                        console.log(id)
                         return (
                             <div className=" w-1/4 ">
+                                <Link to={/places/ + `${img.id}`}><img alt="gallery" className=" cursor-pointer hover:scale-125 border-2 border-black rounded-lg shadow-md w-full object-cover h-full object-center block"
+                                    id="5" key={`${baseApi}${img}${id}`} src={`${baseApi}${img.attributes.image.data.attributes.url}`} />
+                                </Link>
+                            </div>         
+                            /* <div className=" w-1/4 ">
                                 <Link to={/places/ + `${img.attributes.image.data.id}`}><img alt="gallery" className=" cursor-pointer hover:scale-125 border-2 border-black rounded-lg shadow-md w-full object-cover h-full object-center block"
                                     id="5" key={`${baseApi}${img.attributes.image.data}${id}`} src={`${baseApi}${img.attributes.image.data.attributes.url}`} />
                                 </Link>
-                            </div>
+                            </div> */
+                            
                         )
                     })
                 }

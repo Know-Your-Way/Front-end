@@ -1,14 +1,9 @@
 import React from 'react'
 import { GrLocation } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
-const baseApi = 'http://localhost:1337';
 
 
-const Filters = ({ category, filterData, places, setPlaces, location, input, setCurrentCategory, setInput, currentCategory }) => {
-
-    console.log(places, '9')
-    console.log(location, 'location')
-
+const Filters = ({ category, filterData, places, input, setCurrentCategory, setInput, currentCategory }) => {
 
     const onChangeInput = (event) => {
         event.preventDefault()
@@ -42,6 +37,7 @@ const Filters = ({ category, filterData, places, setPlaces, location, input, set
 
 
     return (
+
         <div className='container mx-auto '>
             <div className='  md:bg-white md:h-20 md:mt-3 md:rounded-md '>
                 <div className=' flex flex-col pt-5 justify-evenly items-center md:pt-0 md:flex-row md:items-center md:justify-around'>

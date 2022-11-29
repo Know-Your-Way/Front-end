@@ -1,13 +1,12 @@
 import React from 'react'
-import Places from './Places'
 
 const Cards = () => {
     return (
-        <section className='bg-gray-400 h-auto w-screen'>
+        <section className='bg-gray-300 pb-10 h-auto w-screen'>
             <div className=' container mx-auto'>
-                <h2 className="text-4xl font-bold text-center text-white pt-16">We love to help you - just ask our travelers
+                <h2 className="text-4xl font-bold text-center text-gray-700 pt-16">We love to help you - just ask our travelers
                 </h2>
-                <div className='flex space-x-10 mt-16'>
+                <div className=' grid justify-center md:grid-cols-2 lg:grid-cols-3 gap-10'>
                     <div className=" group w-full h-72 max-w-sm p-2 mt-16 bg-white rounded-lg shadow-lg  dark:bg-gray-800  hover:bg-sky-700">
                         <div className="flex justify-center -mt-10 ">
                             <img className="object-cover w-24 h-24 border-2 border-blue-500 rounded-full dark:border-blue-400" alt="Testimonial avatar" src="../Asset/cards/person1.jpeg" />
@@ -47,7 +46,6 @@ const Cards = () => {
                     </p>
                 </div>
             </div>
-            <Places/>
         </section>
     )
 }

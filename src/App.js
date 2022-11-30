@@ -26,7 +26,7 @@ const App = () => {
     GetLocationView().then((locations) => {
       setLocation(locations)
       let filterLocations = locations
-        if (!input) {
+        if (input) {
           filterLocations = filterLocations.filter((item) => {
             return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
           })

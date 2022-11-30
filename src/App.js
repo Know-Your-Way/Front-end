@@ -14,6 +14,7 @@ export const MyLocation = createContext()
 
 const App = () => {
   const [places, setPlaces] = useState([]);
+  console.log(places)
   const [allPlaces, setAllPlaces] = useState([]);
   const [location, setLocation] = useState([])
   const [category, setCategory] = useState([]);
@@ -26,14 +27,13 @@ const App = () => {
     GetLocationView().then((locations) => {
       setLocation(locations)
       let filterLocations = locations
-        if (!input) {
+        if (input) {
           filterLocations = filterLocations.filter((item) => {
             return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
           })
         }
       setPlaces(filterLocations)
       setAllPlaces(filterLocations)
-      setPlaces(location)
 
       const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
       setCategory(allCategories);

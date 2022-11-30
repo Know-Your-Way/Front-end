@@ -8,7 +8,6 @@ const Filters = ({ category, filterData, places, input, setCurrentCategory, setI
     const onChangeInput = (event) => {
         event.preventDefault()
         setInput(event.target.value)
-        console.log(places, 14)
     }
 
     const onChangeCategory = (event) => {
@@ -22,7 +21,6 @@ const Filters = ({ category, filterData, places, input, setCurrentCategory, setI
         setCurrentCategory(searchCategory)
         filterData(currentCategory)
     }
-
 
     let uniquePlaces = [];
     let uniqueLocations = places.filter((element) => {

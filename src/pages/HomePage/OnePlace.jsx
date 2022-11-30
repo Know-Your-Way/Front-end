@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
-
-const baseApi = 'http://localhost:1337';
-
 const OnePlace = () => {
 
     const [place, setPlace] = useState({
@@ -18,21 +15,15 @@ const OnePlace = () => {
         },
     });
 
-
-    const [param, setParam] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
-    console.log(place)
-    console.log('1', params)
+
 
     useEffect(() => {
-        console.log('inside effect', params);
-        fetch(`http://localhost:1337/api/landmarks/${params.id}?populate=*`)
+        fetch(`https://strapi-production-41f0.up.railway.app/api/landmarks/${params.id}?populate=*`)
             .then(res => res.json())
             .then(landmark => {
-                console.log(landmark, 'landmark')
                 setPlace(landmark.data)
-
             })
 
     }, [])
@@ -41,7 +32,7 @@ const OnePlace = () => {
         <div className=' container mx-auto lg:ml-80 mt-20 mb-10'>
             <button className='mb-12 font-bold' onClick={() => { navigate("/") }}>Back</button>
             <div className=" max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-                <img className="object-cover w-full h-64" src={`${baseApi}${place.attributes.image.data.attributes.url}`} alt="Article" />
+                <img className="object-cover w-full h-64" src={`${place.attributes.image.data.attributes.url}`} alt="Article" />
                 <div className="p-6">
                     <div>
                         <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">Most visited place</span>

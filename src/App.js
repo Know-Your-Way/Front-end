@@ -9,7 +9,6 @@ import Map from './pages/map/Map'
 import GetLocationView from './view-model/GetLocationView'
 import GetLandmarkView from './view-model/GetLandmarkView'
 import OnePlace from './pages/HomePage/OnePlace'
-import { ToastContainer } from 'react-toastify'
 
 export const MyLocation = createContext()
 
@@ -27,14 +26,11 @@ const App = () => {
     GetLocationView().then((locations) => {
       setLocation(locations)
       let filterLocations = locations
-      if (input) {
-        console.log(input, 'input')
         if (input) {
           filterLocations = filterLocations.filter((item) => {
             return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
           })
         }
-      }
       setPlaces(filterLocations)
       setAllPlaces(filterLocations)
       setPlaces(location)
@@ -72,7 +68,6 @@ const App = () => {
           <Route path='/contact' element={<Contact />} />
           <Route path='/map' element={<Map />} />
         </Routes>
-      
         <Footer />
       </MyLocation.Provider>
     </>

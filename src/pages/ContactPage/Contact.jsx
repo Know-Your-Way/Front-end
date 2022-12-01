@@ -29,27 +29,23 @@ const Contact = () => {
       );
     reset();
   };
-  console.log(errors);
-  return (
-    <div className="container mx-auto bg-contact">
-      <form
-        onSubmit={handleSubmit(sendEmail)}
-        className="text-gray-600 body-font relative"
-      >
-        <div className="container px-5 py-24 mx-auto flex">
-          <img
-            src="/Asset/Contact.svg"
-            alt="hero_img"
-            className="object-contain"
-          />
 
-          <div className="lg:w-1/3 md:w-1/2 bg-gray-500 bg-opacity-50 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
-            <h2 className="text-white text-lg mb-1 font-medium title-font">
-              Contact us
-            </h2>
-            <div className="relative mb-4">
-              <label className="leading-7 text-sm text-white"></label>
-              <input
+
+  return (
+
+    <section className=" bg-contact pb-10">
+      <div className=" container  mx-auto">
+        <h2 className=" pt-5 md:ml-8 md:text-3xl mb-4 font-medium text-white">
+          Contact us
+        </h2>
+        <div className="md:ml-20 ml-10 grid md:grid-cols-2 ">
+          <div className=" bg-gray-600 w-96 p-5 rounded-xl  ">
+            <form 
+              onSubmit={handleSubmit(sendEmail)}
+              className="text-gray-60 justify-center">
+              <label className="leading-7 text-lg text-white">First Name</label>
+              <br />
+              <input className=" w-80 my-1 py-1 rounded-md"
                 name="from_name"
                 {...register("from_name", {
                   required: "this is required",
@@ -62,16 +58,15 @@ const Contact = () => {
                     message: "only characters allowed",
                   },
                 })}
-                placeholder="First Name"
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               ></input>
               <p className="text-sm italic text-rose-600">
                 {errors.from_name?.message}
               </p>
 
-              <label className="leading-7 text-sm text-white"></label>
-              <input
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              <label className="leading-7 text-lg text-white">Last Name</label>
+
+              <br />
+              <input className="w-80 my-1 py-1 rounded-md"
                 {...register("last_name", {
                   required: "this is required",
                   minLength: {
@@ -79,27 +74,27 @@ const Contact = () => {
                     message: "minimal length for last name is 4",
                   },
                 })}
-                placeholder="Last Name"
               />
               <p className="text-sm italic text-rose-600">
                 {errors.last_name?.message}
               </p>
-              <label className="leading-7 text-sm text-white"></label>
-              <input
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              <label className="leading-7 text-lg text-white">Telephone Number</label>
+
+              <br />
+              <input className="w-80 my-1 py-1 rounded-md"
                 {...register("contact_number", {
                   required: "this is required",
                 })}
-                placeholder="Telephone Number"
+                placeholder=""
                 type="number"
               />
               <p className="text-sm italic text-rose-600">
                 {errors.contact_number?.message}
               </p>
-              <label className="leading-7 text-sm text-white"></label>
-              <input
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-                placeholder="E-mail"
+              <label className="leading-7 text-lg text-white">Email</label>
+
+              <br />
+              <input className="w-80 my-1 py-1 rounded-md"
                 {...register("user_email", {
                   required: "this field is required",
                   pattern: {
@@ -111,28 +106,29 @@ const Contact = () => {
               <p className="text-sm italic text-rose-600">
                 {errors.user_email?.message}
               </p>
-            </div>
-            <div className="relative mb-4">
-              <label className="leading-7 text-sm text-white">Message</label>
-              <textarea
+              <label className="leading-7 text-lg text-white">Message</label>
+
+              <br />
+              <textarea className="w-80 my-1 py-1 rounded-md"
                 {...register("message", { required: "Please enter a message" })}
-                className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
                 placeholder="Write your message here"
                 name="message"
               ></textarea>
-            </div>
-            <button
-              className="text-gray-600 bg-white border-0 py-2 px-6 focus:outline-none hover:bg-gray-300 rounded text-lg"
-              type="submit"
-            >
-              Send
-            </button>
-            {/*<div className="row">{result ? <Result /> : null}</div> */}
+              <br />
+              <button className="bg-blue-600 my-2 text-white py-2 px-5 rounded-lg ml-60" type="submit">Send</button>
+            </form>
           </div>
+            <img
+              src="/Asset/Contact.svg"
+              alt="hero_img"
+              className="mt-20 mb-10"
+            />
+
         </div>
-      </form>
-    </div>
-  );
+      </div>
+    </section>
+
+  )
 };
 
-export default Contact;
+export default Contact

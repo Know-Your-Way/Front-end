@@ -38,7 +38,7 @@ const Cards = () => {
                         </div>
                     </div>
                 </div>
-                <div className='w-full p-2 mt-16 bg-white rounded-lg shadow-lg dark:bg-gray-800'>
+                <div className='w-full p-2 mt-16 bg-white text-blue-800 rounded-lg shadow-lg dark:bg-gray-800'>
                     <p className="px-5 text-center tracking-widest text-lg">
                         <q>
                             Remember that happiness if a way of travel, not a destination

@@ -18,7 +18,7 @@ const App = () => {
   const [location, setLocation] = useState([])
   const [category, setCategory] = useState([]);
   const [landmark, setLandmark] = useState([]);
-  const [currentCategory, setCurrentCategory] = useState('')
+  const [currentCategory, setCurrentCategory] = useState('Select option')
   const [input, setInput] = useState('')
 
 

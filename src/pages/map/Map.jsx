@@ -8,13 +8,16 @@ import { MyLocation } from "../../App";
 import Filters from "../../components/Filters";
 import UseGeoLocation from "./geolocation";
 
+
+
+
 const Map = () => {
   const { category, currentCategory, places, input, setCurrentCategory, setInput, filterData } = useContext(MyLocation);
-
+  console.log(category)
   const position = [50.846, 4.3518];
   const userLocation = UseGeoLocation();
 
-
+  
   return (
     <>
       <section className="min-h-screen min-w-full leaflet-container">
@@ -58,7 +61,9 @@ const Map = () => {
 
           {Array.isArray(places)
             ? places.map((cat_name) => {
+              
               const { lat_number, long_number, address } = cat_name.attributes;
+              console.log(lat_number)
               return (
                 <Marker
                   position={[lat_number, long_number]}

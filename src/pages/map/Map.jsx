@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
@@ -15,6 +15,7 @@ import { MyLocation } from "../../App";
 import Filters from "../../components/Filters";
 import UseGeoLocation from "./geolocation";
 
+
 const Map = () => {
   const {
     category,
@@ -24,13 +25,17 @@ const Map = () => {
     setCurrentCategory,
     setInput,
     filterData,
+    allPlaces,
   } = useContext(MyLocation);
-  console.log(category);
   const position = [50.846, 4.3518];
   const userLocation = UseGeoLocation();
+  const [icon, setIcon] = useState(new Icon({
+    iconUrl: markerIconPng,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+  }))
 
   const getIcon = () => {
-    console.log(currentCategory);
     switch (currentCategory) {
       case "toilet":
         return new Icon({
@@ -82,7 +87,8 @@ const Map = () => {
           iconAnchor: [12, 41],
         });
     }
-  };
+  }
+
 
   return (
     <>
@@ -96,6 +102,9 @@ const Map = () => {
             setCurrentCategory={setCurrentCategory}
             places={places}
             input={input}
+            getIcon={getIcon}
+            setIcon={setIcon}
+            allPlaces={allPlaces}
           />
         </div>
         <MapContainer
@@ -133,9 +142,9 @@ const Map = () => {
             ? places.map((cat_name) => {
                 const { lat_number, long_number, address } =
                   cat_name.attributes;
-                console.log(lat_number);
+                
                 return (
-                  <Marker position={[lat_number, long_number]} icon={getIcon()}>
+                  <Marker position={[lat_number, long_number]} icon={icon}>
                     <Popup>
                       <h1>{address}</h1>
                     </Popup>

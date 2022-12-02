@@ -15,26 +15,18 @@ export const MyLocation = createContext()
 const App = () => {
   const [places, setPlaces] = useState([]);
   const [allPlaces, setAllPlaces] = useState([]);
-  const [location, setLocation] = useState([])
   const [category, setCategory] = useState([]);
   const [landmark, setLandmark] = useState([]);
   const [currentCategory, setCurrentCategory] = useState('Select option')
   const [input, setInput] = useState('')
+  
 
 
   useEffect(() => {
     GetLocationView().then((locations) => {
-      setLocation(locations)
-      let filterLocations = locations
-        if (input) {
-          filterLocations = filterLocations.filter((item) => {
-            return input.toLowerCase() === item.attributes.sub_urban.toLowerCase()
-          })
-        }
-      setPlaces(filterLocations)
-      setAllPlaces(filterLocations)
-      setPlaces(location)
-
+      setPlaces(locations)
+      setAllPlaces(locations)
+      
       const allCategories = [...new Set(locations.map((curEle) => curEle.attributes.category))]
       setCategory(allCategories);
     })
@@ -42,19 +34,18 @@ const App = () => {
     GetLandmarkView().then((landmark) => {
       setLandmark(landmark)
     })
-  }, [currentCategory])
-
-  useEffect(() => {
-    setPlaces(location)
-  }, [input])
+  }, [])
 
 
   function filterData(catItem) {
     const result = allPlaces.filter((curItem) => {
-      return curItem.attributes.category === catItem
+      return curItem.attributes.category.toLowerCase() === catItem.toLowerCase()
+    })
+    const filterLocation = result.filter((loc)=>{
+      return loc.attributes.sub_urban.toLowerCase() === input.toLowerCase()
     })
     setCurrentCategory(catItem)
-    setPlaces(result)
+    setPlaces(filterLocation)
   }
 
   return (
@@ -62,11 +53,11 @@ const App = () => {
       <MyLocation.Provider value={{ category, places, landmark, allPlaces, input, setCurrentCategory, setInput, filterData, currentCategory }}>
         <Nav />
         <Routes>
-          <Route path='/' element={<Home input={input} setInput={setInput} places={places} setCurrentCategory={setCurrentCategory} />} />
+          <Route path='/' element={<Home input={input} setInput={setInput} places={places} setCurrentCategory={setCurrentCategory} allPlaces={allPlaces} />} />
           <Route path='/about' element={<About />} />
           <Route path='/places/:id' element={<OnePlace/>} />
           <Route path='/contact' element={<Contact />} />
-          <Route path='/map' element={<Map />} />
+          <Route path='/map' element={<Map/>} />
         </Routes>
         <Footer />
       </MyLocation.Provider>

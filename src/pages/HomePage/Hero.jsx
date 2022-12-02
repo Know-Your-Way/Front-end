@@ -2,7 +2,7 @@ import Filters from '../../components/Filters'
 import { useContext } from 'react'
 import { MyLocation } from '../../App'
 
-const Hero = ({ places, input, setInput }) => {
+const Hero = ({ places, input, setInput, allPlaces }) => {
     const { category, filterData, setCurrentCategory, currentCategory } = useContext(MyLocation)
     return (
         <div className='bg-home bg-cover bg-center h-130 md:h-129'>
@@ -24,6 +24,7 @@ const Hero = ({ places, input, setInput }) => {
                 places={places}
                 setCurrentCategory={setCurrentCategory}
                 input={input}
+                allPlaces={allPlaces}
             />
         </div>
     )

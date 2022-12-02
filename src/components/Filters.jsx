@@ -3,7 +3,7 @@ import { GrLocation } from 'react-icons/gr'
 import { Link } from 'react-router-dom'
 
 
-const Filters = ({ category, filterData, places, input, setCurrentCategory, setInput, currentCategory }) => {
+const Filters = ({ category, filterData, places, allPlaces, input, setCurrentCategory, setInput, currentCategory, getIcon, setIcon }) => {
 
     const onChangeInput = (event) => {
         event.preventDefault()
@@ -13,13 +13,12 @@ const Filters = ({ category, filterData, places, input, setCurrentCategory, setI
     const onChangeCategory = (event) => {
         event.preventDefault()
         setCurrentCategory(event.target.value)
-
     }
 
-    const onSearch = (searchInput, searchCategory) => {
+    const onSearch = (searchInput) => {
         setInput(searchInput)
-        setCurrentCategory(searchCategory)
         filterData(currentCategory)
+        setIcon(getIcon())
     }
 
     let uniquePlaces = [];
@@ -33,7 +32,7 @@ const Filters = ({ category, filterData, places, input, setCurrentCategory, setI
     });
     places = uniqueLocations;
 
-
+    console.log(allPlaces, '43')
     return (
 
         <div className='container mx-auto '>
@@ -45,7 +44,7 @@ const Filters = ({ category, filterData, places, input, setCurrentCategory, setI
                                 onChange={onChangeInput} />
                             <GrLocation className=' absolute left-56 top-3 md:left-44 lg:left-56' />
                             {
-                                places.filter((item) => {
+                                allPlaces.filter((item) => {
                                     const searchInput = input.toLowerCase()
                                     const address = item.attributes.sub_urban.toLowerCase()
                                     return searchInput && address.startsWith(searchInput) && address !== searchInput;
@@ -73,7 +72,7 @@ const Filters = ({ category, filterData, places, input, setCurrentCategory, setI
                     </div>
                     <div className=' mt-10 md:absolute right-5 md:mt-20 '>
                         <div className=' relative'>
-                            <Link to='/map'> <button class="px-6 py-2 w-64 md:w-52 lg:w-64 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                            <Link to='/map'> <button className="px-6 py-2 w-64 md:w-52 lg:w-64 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                                 onClick={() => onSearch(input, category)}>Search</button></Link>
                         </div>
                     </div>

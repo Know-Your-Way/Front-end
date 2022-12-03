@@ -140,13 +140,14 @@ const Map = () => {
 
           {Array.isArray(places)
             ? places.map((cat_name) => {
-                const { lat_number, long_number, address } =
+                const { lat_number, long_number, category, address } =
                   cat_name.attributes;
                 
                 return (
                   <Marker position={[lat_number, long_number]} icon={icon}>
                     <Popup>
-                      <h1>{address}</h1>
+                       <h1 className=" text-blue-600 capitalize leading-3 font-bold text-center">{category}</h1>
+                      <p className=" text-gray-500 font-medium leading-3 text-center">{address}</p>
                     </Popup>
                   </Marker>
                 );

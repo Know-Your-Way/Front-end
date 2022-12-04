@@ -39,10 +39,10 @@ const App = () => {
 
   function filterData(catItem) {
     const result = allPlaces.filter((curItem) => {
-      return curItem.attributes.category.toLowerCase() === catItem.toLowerCase()
+      return curItem.attributes?.category?.toLowerCase() === catItem?.toLowerCase()
     })
     const filterLocation = result.filter((loc)=>{
-      return loc.attributes.sub_urban.toLowerCase() === input.toLowerCase()
+      return loc.attributes?.sub_urban?.toLowerCase() === input?.toLowerCase()
     })
     setCurrentCategory(catItem)
     setPlaces(filterLocation)

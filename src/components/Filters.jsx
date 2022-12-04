@@ -22,7 +22,7 @@ const Filters = ({ category, filterData, places, allPlaces, input, setCurrentCat
     }
 
     let uniquePlaces = [];
-    let uniqueLocations = places.filter((element) => {
+    let uniqueLocations = allPlaces.filter((element) => {
         const isDuplicate = uniquePlaces.includes(element.attributes.sub_urban.trim());
         if (!isDuplicate) {
             uniquePlaces.push(element.attributes.sub_urban.trim());

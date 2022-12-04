@@ -23,9 +23,9 @@ const Filters = ({ category, filterData, places, allPlaces, input, setCurrentCat
 
     let uniquePlaces = [];
     let uniqueLocations = places.filter((element) => {
-        const isDuplicate = uniquePlaces.includes(element.attributes.sub_urban);
+        const isDuplicate = uniquePlaces.includes(element.attributes.sub_urban.trim());
         if (!isDuplicate) {
-            uniquePlaces.push(element.attributes.sub_urban);
+            uniquePlaces.push(element.attributes.sub_urban.trim());
             return true;
         }
         return false;
@@ -43,18 +43,20 @@ const Filters = ({ category, filterData, places, allPlaces, input, setCurrentCat
                             <input type='text' value={input} placeholder='Enter Your Destination?' className=' w-64 md:w-52 lg:w-64 rounded-md'
                                 onChange={onChangeInput} />
                             <GrLocation className=' absolute left-56 top-3 md:left-44 lg:left-56' />
+                            <div className='bg-gray-100 px-3 py-1 text-blue-800 absolute shadow-md rounded-md top-11'>
                             {
-                                allPlaces.filter((item) => {
-                                    const searchInput = input.toLowerCase()
-                                    const address = item.attributes.sub_urban.toLowerCase()
-                                    return searchInput && address.startsWith(searchInput) && address !== searchInput;
+                                uniqueLocations.filter((item) => {
+                                    const searchInput = input?.toLowerCase()
+                                    const address = item.attributes.sub_urban?.toLowerCase()
+                                    return searchInput && address?.startsWith(searchInput) && address !== searchInput;
                                 })
                                     .map((item) => {
                                         return (
-                                            <div className=' bg-gray-100 px-3 py-1 text-blue-800 absolute shadow-md rounded-md top-11' onClick={() => onSearch(item.attributes.sub_urban)}>{item.attributes.sub_urban}</div>
+                                            <div className='' onClick={() => onSearch(item.attributes.sub_urban)}>{item.attributes.sub_urban}</div>
                                         )
                                     })
                             }
+                            </div>
                         </div>
                     </div>
                     <div className=' mt-10 md:absolute md:mt-20'>
